@@ -7,7 +7,12 @@ import { useAuthStore } from "../../store/auth.store";
 import { useCartStore } from "../../store/cart.store";
 import { useWishlistStore } from "../../store/wishlist.store";
 
-const LINKS = ["Shoes", "Women", "Men", "Home"];
+const LINKS = [
+  { label: "Shoes", href: "/collections/featured" },
+  { label: "Women", href: "/collections/new-arrivals" },
+  { label: "Men", href: "/categories/men" },
+  { label: "Home", href: "/" },
+];
 
 function CountBadge({ count, label }: { count: number; label: string }) {
   return (
@@ -56,12 +61,12 @@ export function Navbar() {
 
         <ul className="hidden gap-6 md:flex">
           {LINKS.map((link) => (
-            <li key={link}>
+            <li key={link.label}>
               <Link
-                href={link === "Home" ? "/" : `/${link.toLowerCase()}`}
+                href={link.href}
                 className="text-sm font-semibold uppercase tracking-wide text-zirios-white transition-colors hover:text-zirios-red"
               >
-                {link}
+                {link.label}
               </Link>
             </li>
           ))}

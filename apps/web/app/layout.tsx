@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   description:
     "ZIRIOS is a futuristic streetwear house engineered at the intersection of performance, luxury, and machine precision.",
   metadataBase: new URL("https://zirios.com"),
+  icons: { icon: "/favicon.svg" },
   openGraph: {
     title: "ZIRIOS",
     description: "Futuristic streetwear, engineered.",
