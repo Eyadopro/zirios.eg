@@ -6,17 +6,24 @@ import { GlitchText } from "../hero/GlitchText";
 
 export function IntroScreen({ onDone }: { onDone: () => void }) {
   const [done, setDone] = useState(false);
-  const onceRef = useRef(false);
+  const initRef = useRef(false);
 
   useEffect(() => {
-    if (onceRef.current) return;
-    onceRef.current = true;
+    if (initRef.current) return;
+    initRef.current = true;
 
     if (sessionStorage.getItem("zirios-intro-seen")) {
       onDone();
       setDone(true);
       return;
     }
+
+    const bar = document.getElementById("intro-bar");
+    const label = document.getElementById("intro-label");
+    const crack = document.getElementById("intro-crack");
+    const root = document.getElementById("intro-root");
+    const left = document.getElementById("intro-left");
+    const right = document.getElementById("intro-right");
 
     const tl = gsap.timeline({
       onComplete: () => {
@@ -26,19 +33,8 @@ export function IntroScreen({ onDone }: { onDone: () => void }) {
       },
     });
 
-    const bar = document.getElementById("intro-bar");
-    const label = document.getElementById("intro-label");
-    const crack = document.getElementById("intro-crack");
-    const root = document.getElementById("intro-root");
-    const left = document.getElementById("intro-left");
-    const right = document.getElementById("intro-right");
-
-    const updateLabel = (p: number) => {
-      if (label) label.textContent = p < 100 ? "AWAKENING" : "ENTER";
-    };
-
-    tl.to(bar, { width: "100%", duration: 2.5, ease: "power2.out", onUpdate: function () {
-      if (bar) updateLabel(parseFloat(bar.style.width) || 0);
+    tl.to(bar, { width: "100%", duration: 2.5, ease: "power2.out", onUpdate: () => {
+      if (bar && label) label.textContent = parseFloat(bar.style.width || "0") >= 100 ? "ENTER" : "AWAKENING";
     }})
       .to(crack, { scaleX: 1, duration: 0.6, ease: "power2.in" })
       .to(root, { duration: 0.5, onStart: () => root?.classList.toggle("screen-shake", true) }, "<")
@@ -46,14 +42,7 @@ export function IntroScreen({ onDone }: { onDone: () => void }) {
       .to(right, { xPercent: 100, duration: 1.1, ease: "power4.inOut" }, "<")
       .to(root, { autoAlpha: 0, duration: 0.3 }, "-=0.2");
 
-    const fallback = setTimeout(() => {
-      tl.progress(1);
-    }, 12000);
-
-    return () => {
-      tl.kill();
-      clearTimeout(fallback);
-    };
+    setTimeout(() => { tl.progress(1); }, 12000);
   }, [onDone]);
 
   if (done) return null;
