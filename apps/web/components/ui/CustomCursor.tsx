@@ -25,11 +25,11 @@ export function CustomCursor() {
       <div
         ref={dotRef}
         className="pointer-events-none fixed top-0 left-0 z-[9999] h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-zirios-red shadow-glow"
-        style={{ transition: "transform 0.05s linear" }}
+        style={{ transform: "translate(0, 0)" }}
       />
       <div
         ref={cursorRef}
-        className="pointer-events-none fixed top-0 left-0 z-[9998] h-8 w-8 rounded-full border border-zirios-red/50 transition-all duration-200"
+        className="pointer-events-none fixed top-0 left-0 z-[9998] h-8 w-8 rounded-full border border-zirios-red/50 transition-[width,height,border,opacity] duration-300"
         style={{ transform: "translate(0, 0)" }}
       />
     </>

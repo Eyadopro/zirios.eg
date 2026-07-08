@@ -14,7 +14,8 @@ import { GlitchText } from "../hero/GlitchText";
  */
 export function IntroScreen({ onDone }: { onDone: () => void }) {
   const [progress, setProgress] = useState(0);
-  const [phase, setPhase] = useState<"charging" | "shaking" | "opening" | "done">("charging");
+  const [phase, setPhase] = useState<"charging" | "shaking" | "done">("charging");
+  const openingRef = useRef(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const leftDoorRef = useRef<HTMLDivElement>(null);
   const rightDoorRef = useRef<HTMLDivElement>(null);
@@ -43,10 +44,9 @@ export function IntroScreen({ onDone }: { onDone: () => void }) {
   }, []);
 
   useEffect(() => {
-    if (phase !== "shaking") return;
+    if (phase !== "shaking" || openingRef.current) return;
+    openingRef.current = true;
 
-    // Build tension: the crack widens and the whole frame shakes harder,
-    // then the doors are torn open.
     const tl = gsap.timeline({
       onComplete: () => {
         sessionStorage.setItem("zirios-intro-seen", "1");
@@ -56,29 +56,10 @@ export function IntroScreen({ onDone }: { onDone: () => void }) {
     });
 
     tl.to(crackRef.current, { scaleX: 1, duration: 0.6, ease: "power2.in" })
-      .to(rootRef.current, { duration: 0.5, onStart: () => setPhaseShake(true) }, "<")
-      .call(() => setPhase("opening"))
-      .to(leftDoorRef.current, {
-        xPercent: -100,
-        duration: 1.1,
-        ease: "power4.inOut",
-      })
-      .to(
-        rightDoorRef.current,
-        { xPercent: 100, duration: 1.1, ease: "power4.inOut" },
-        "<"
-      )
+      .to(rootRef.current, { duration: 0.5, onStart: () => rootRef.current?.classList.toggle("screen-shake", true) }, "<")
+      .to(leftDoorRef.current, { xPercent: -100, duration: 1.1, ease: "power4.inOut" })
+      .to(rightDoorRef.current, { xPercent: 100, duration: 1.1, ease: "power4.inOut" }, "<")
       .to(rootRef.current, { autoAlpha: 0, duration: 0.3 }, "-=0.2");
-
-    function setPhaseShake(active: boolean) {
-      if (rootRef.current) {
-        rootRef.current.classList.toggle("screen-shake", active);
-      }
-    }
-
-    return () => {
-      tl.kill();
-    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phase]);
 
