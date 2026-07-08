@@ -13,14 +13,14 @@ if (typeof window !== "undefined") {
 }
 
 const FEATURED = [
-  { slug: "phantom-hoodie", name: "Phantom Hoodie", price: 24000, image: "/products/1.jpg" },
-  { slug: "carbon-cargo", name: "Carbon Cargo", price: 19500, image: "/products/2.jpg" },
-  { slug: "voltage-tee", name: "Voltage Tee", price: 9500, image: "/products/3.jpg" },
-  { slug: "aero-runner", name: "Aero Runner", price: 32000, image: "/products/4.jpg" },
-  { slug: "phantom-hoodie-2", name: "Titan Jacket", price: 45000, image: "/products/5.jpg" },
-  { slug: "carbon-cargo-2", name: "Circuit Pant", price: 28500, image: "/products/6.jpg" },
-  { slug: "voltage-tee-2", name: "Neon Tee", price: 8500, image: "/products/7.jpg" },
-  { slug: "aero-runner-2", name: "Vapor Hoodie", price: 22000, image: "/products/8.jpg" },
+  { slug: "phantom-hoodie", name: "Phantom Hoodie", price: 24000, image: "/products/1.svg" },
+  { slug: "carbon-cargo", name: "Carbon Cargo", price: 19500, image: "/products/2.svg" },
+  { slug: "voltage-tee", name: "Voltage Tee", price: 9500, image: "/products/3.svg" },
+  { slug: "aero-runner", name: "Aero Runner", price: 32000, image: "/products/4.svg" },
+  { slug: "phantom-hoodie-2", name: "Titan Jacket", price: 45000, image: "/products/5.svg" },
+  { slug: "carbon-cargo-2", name: "Circuit Pant", price: 28500, image: "/products/6.svg" },
+  { slug: "voltage-tee-2", name: "Neon Tee", price: 8500, image: "/products/7.svg" },
+  { slug: "aero-runner-2", name: "Vapor Hoodie", price: 22000, image: "/products/8.svg" },
 ];
 
 const TESTIMONIALS = [
