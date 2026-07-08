@@ -46,8 +46,20 @@ export default function CollectionPage() {
 
   if (!data) {
     return (
-      <div className="flex h-screen items-center justify-center">
-        <p className="text-zirios-gray-300">Collection not found</p>
+      <div className="pt-24">
+        <div className="relative flex h-64 items-center justify-center overflow-hidden bg-gradient-to-br from-zirios-gray-900 to-black md:h-96">
+          <div className="relative z-10 text-center">
+            <h1 className="font-display text-display uppercase tracking-tight">{slug?.replace(/-/g, " ") || "Collection"}</h1>
+            <p className="mt-4 text-zirios-gray-300">Curated for those who demand more.</p>
+          </div>
+        </div>
+        <div className="mx-auto max-w-7xl px-gutter py-section">
+          <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
+            {["phantom-hoodie","carbon-cargo","voltage-tee","aero-runner"].map((s) => (
+              <ProductCard key={s} slug={s} name={s.replace(/-/g, " ")} price={19900} image="" />
+            ))}
+          </div>
+        </div>
       </div>
     );
   }

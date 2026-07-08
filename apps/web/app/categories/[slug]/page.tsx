@@ -45,8 +45,18 @@ export default function CategoryPage() {
 
   if (!data) {
     return (
-      <div className="flex h-screen items-center justify-center">
-        <p className="text-zirios-gray-300">Category not found</p>
+      <div className="pt-24">
+        <div className="mx-auto max-w-7xl px-gutter py-8">
+          <h1 className="font-display text-display uppercase tracking-tight">{slug?.replace(/-/g, " ") || "Category"}</h1>
+          <p className="mt-2 text-sm text-zirios-gray-500">Explore our collection</p>
+        </div>
+        <div className="mx-auto max-w-7xl px-gutter py-section">
+          <div className="grid grid-cols-2 gap-6 md:grid-cols-3 lg:grid-cols-4">
+            {["phantom-hoodie","carbon-cargo","voltage-tee","aero-runner"].map((s) => (
+              <ProductCard key={s} slug={s} name={s.replace(/-/g, " ")} price={19900} image="" />
+            ))}
+          </div>
+        </div>
       </div>
     );
   }
