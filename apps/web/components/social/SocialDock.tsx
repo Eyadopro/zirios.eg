@@ -1,12 +1,11 @@
 "use client";
-
-import { Instagram, Mail, Twitter, Youtube } from "lucide-react";
+import { Facebook, Github, Instagram, Mail } from "lucide-react";
 import { useRef } from "react";
 
 const LINKS = [
-  { icon: Instagram, href: "https://instagram.com/zirios", label: "Instagram" },
-  { icon: Twitter, href: "https://twitter.com/zirios", label: "X / Twitter" },
-  { icon: Youtube, href: "https://youtube.com/@zirios", label: "YouTube" },
+  { icon: Instagram, href: "https://www.instagram.com/eyad.5_25/", label: "Instagram" },
+  { icon: Facebook, href: "https://www.facebook.com/share/1GpfcvLY2G/", label: "Facebook" },
+  { icon: Github, href: "https://github.com/Eyadopro", label: "GitHub" },
   { icon: Mail, href: "mailto:eyadopro88@gmail.com", label: "Email us" },
 ];
 
